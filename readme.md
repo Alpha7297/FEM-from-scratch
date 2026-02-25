@@ -3,7 +3,11 @@
 
 使用系统基础库从零开始编写的Poisson方程FEM求解器
 
-即求解方程$\nabla^2 \phi=\rho$
+即求解方程
+
+$$
+\nabla^2 \phi=\rho
+$$
 
 支持2D凹多边形delaunay三角分解
 
@@ -13,11 +17,11 @@ FEM求解器支持自定义纯迪利克雷或诺伊曼边界条件，目前不�
 
 ## 2.项目内容
 
-gen.cpp为三角网格划分，复杂度约$O(n^2)$
+gen.cpp为三角网格划分，复杂度约O(n^2)
 
-LU.cpp为稠密矩阵LU分解，用于求解$K \phi=f$矩阵方程，在$np\ll n$时复杂度约$O(\frac{n^3}{np})$，其中$np$是分块大小
+LU.cpp为稠密矩阵LU分解，用于求解K \phi=f矩阵方程，复杂度约O(n^3/np)，其中np是分块大小
 
-cal.cpp为FEM求解器，组装矩阵，复杂度约$O(n^2)$
+cal.cpp为FEM求解器，组装矩阵，复杂度约O(n^2)
 
 demo.cpp演示迪利克雷边界条件求解，nemo.cpp演示诺伊曼边界求解
 
