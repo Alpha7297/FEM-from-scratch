@@ -21,7 +21,7 @@ double rho(point a){//\nabla^2 phi=rho
 }
 int main(void){
     np=16;//LU分解分块数，np=16是反复测试的最好结果，32核CPU上分解32767^2稠密矩阵速度可以达到270s
-    r_avg=0.03;//点平均间隔，太小会MLE，耗时指数增长
+    r_avg=0.05;//点平均间隔，太小会MLE，耗时指数增长
     k_poss=30;//泊松圆盘取点，每个活跃点可生成随机点个数，设置越大速度越慢，但可能更均匀
     auto start_time=steady_clock::now();
 
@@ -34,7 +34,7 @@ int main(void){
 
     auto end_time=steady_clock::now();
     duration<double> elapse_seconds=end_time-start_time;
-    printf("网格生成用时%.5lfs,生成%zu个点,%zu个三角形\n",elapse_seconds,ans.pr.size(),ans.trir.size());
+    printf("generating mesh cost%.5lfs,generate %zu points, %zu triangles\n",elapse_seconds,ans.pr.size(),ans.trir.size());
 
     start_time=steady_clock::now();
     
@@ -42,7 +42,7 @@ int main(void){
 
     end_time=steady_clock::now();
     elapse_seconds=end_time-start_time;
-    printf("求解矩阵用时%.5lfs\n",elapse_seconds);
+    printf("solving matrix equation cost%.5lfs\n",elapse_seconds);
 
     FILE* pf=fopen("points.txt","w");
     for(int i=0;i<ans.pr.size();i++){

@@ -21,20 +21,20 @@ double rho(point a){//\nabla^2 phi=rho
 }
 int main(void){
     np=16;//LU分解分块数，np=16是反复测试的最好结果，32核CPU上分解32767^2稠密矩阵速度可以达到270s
-    r_avg=0.02;//点平均间隔，太小会MLE，耗时指数增长
+    r_avg=0.05;//点平均间隔，太小会MLE，耗时指数增长
     k_poss=30;//泊松圆盘取点，每个活跃点可生成随机点个数，设置越大速度越慢，但可能更均匀
     auto start_time=steady_clock::now();
 
-    vector<point> edges=gen_edge(f);//第一种生成边界方式，给定r(theta)，目前不支持自交图形，如r=cosnθ的玫瑰线
-    //vector<point> origin_edges={//第二种生成边界方式，直接给定边界上的点
-    //    {0,0},{4,0},{4,2},{3,2},{3,1},{1,1},{1,2},{0,2}
-    //};
-    //vector<point> edges=better_edge(origin_edges);//由于原来点间隔可能过大，通过gen.cpp中的better_edge函数自动转换成更好的网格
+    //vector<point> edges=gen_edge(f);//第一种生成边界方式，给定r(theta)，目前不支持自交图形，如r=cosnθ的玫瑰线
+    vector<point> origin_edges={//第二种生成边界方式，直接给定边界上的点
+        {0,0},{4,0},{4,2},{3,2},{3,1},{1,1},{1,2},{0,2}
+    };
+    vector<point> edges=better_edge(origin_edges);//由于原来点间隔可能过大，通过gen.cpp中的better_edge函数自动转换成更好的网格
     RES ans=triangle_gen(edges);//生成三角网格
 
     auto end_time=steady_clock::now();
     duration<double> elapse_seconds=end_time-start_time;
-    printf("网格生成用时%.5lfs,生成%zu个点,%zu个三角形\n",elapse_seconds,ans.pr.size(),ans.trir.size());
+    printf("generating mesh cost%.5lfs,generate %zu points, %zu triangles\n",elapse_seconds,ans.pr.size(),ans.trir.size());
 
     start_time=steady_clock::now();
     
@@ -42,7 +42,7 @@ int main(void){
 
     end_time=steady_clock::now();
     elapse_seconds=end_time-start_time;
-    printf("求解矩阵用时%.5lfs\n",elapse_seconds);
+    printf("solving matrix equation cost%.5lfs\n",elapse_seconds);
 
     FILE* pf=fopen("points.txt","w");
     for(int i=0;i<ans.pr.size();i++){
