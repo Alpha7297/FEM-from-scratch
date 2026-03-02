@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-title=input("请输入图表名")
+title="Result"
 points=[]
 with open("points.txt","r") as f:
     for line in f:

@@ -1,9 +1,9 @@
 CXX=g++
-CXXFLAGS=-O3 -Wall -std=c++11 -fopenmp
+CXXFLAGS=-O3 -std=c++11 -fopenmp -w
 DEMO_TARGETS=demo
-DEMO_SRC=gen.cpp LU.cpp cal.cpp demo.cpp
+DEMO_SRC=gen.cpp cal.cpp demo.cpp
 NEMO_TARGETS=nemo
-NEMO_SRC=gen.cpp LU.cpp cal.cpp nemo.cpp
+NEMO_SRC=gen.cpp cal.cpp nemo.cpp
 TEST_TARGET=test
 TEST_SRC=gen.cpp test.cpp
 DATA_FILES=points.txt triangles.txt phi.txt

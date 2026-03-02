@@ -1,12 +1,10 @@
 #ifndef CAL_H
 #define CAL_H
 #include "geometry.hpp"
-#include "LU.h"
 #include<cstdio>
 #include<cstdlib>
 #include<algorithm>
 #include<omp.h>
-extern int np;
 typedef struct PHI{
     std::vector<double> phi;
 }PHI;

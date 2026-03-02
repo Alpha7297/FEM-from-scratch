@@ -4,7 +4,6 @@
 //注意所有点到原点距离要小于100，如果想更大在gen.cpp里修改大三角形和分桶上限
 using std::vector;
 using namespace std::chrono;
-extern int np;
 extern double r_avg;
 extern int k_poss;
 double g(point a){//迪利克雷边界条件，phi(x,y)=g({x,y})
@@ -20,7 +19,6 @@ double rho(point a){//\nabla^2 phi=rho
     return 0;
 }
 int main(void){
-    np=16;//LU分解分块数，np=16是反复测试的最好结果，32核CPU上分解32767^2稠密矩阵速度可以达到270s
     r_avg=0.02;//点平均间隔，太小会MLE，耗时指数增长
     k_poss=30;//泊松圆盘取点，每个活跃点可生成随机点个数，设置越大速度越慢，但可能更均匀
     auto start_time=steady_clock::now();

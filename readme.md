@@ -15,9 +15,7 @@ FEM求解器支持自定义纯迪利克雷或诺伊曼边界条件，目前不�
 
 gen.cpp为三角网格划分，复杂度约$O(n^2)$
 
-LU.cpp为稠密矩阵LU分解，用于求解$K \phi=f$矩阵方程，在$np\ll n$时复杂度约$O(\frac{n^3}{np})$，其中$np$是分块大小
-
-cal.cpp为FEM求解器，组装矩阵，复杂度约$O(n^2)$
+cal.cpp为FEM求解器，使用高斯迭代法求解方程
 
 demo.cpp演示迪利克雷边界条件求解，nemo.cpp演示诺伊曼边界求解
 
@@ -35,7 +33,7 @@ linux系统输入make all显示demo.cpp求解结果图像
 
 windows输入
 ```bat
-g++ -O3 -fopenmp LU.cpp gen.cpp cal.cpp demo.cpp -o demo.exe
+g++ -O3 -fopenmp -w gen.cpp cal.cpp demo.cpp -o demo.exe
 .\ demo.exe
 python plotphi.py 
 ```
@@ -43,7 +41,7 @@ python plotphi.py
 
 输入
 ```bat
-g++ -O3 -fopenmp LU.cpp gen.cpp cal.cpp nemo.cpp -o nemo.exe
+g++ -O3 -fopenmp -w gen.cpp cal.cpp nemo.cpp -o nemo.exe
 .\ nemo.exe
 python plotphi.py 
 ```
@@ -147,9 +145,10 @@ double rho(point a){
 
 在个人16核上电脑测试
 
-| 点数 | 网格生成用时(s) | LU分解用时(s) |
+| 点数 | 网格生成用时(s) | 求解方程用时(s) |
 |------|-----------------|---------------|
-| 1000 | 0.13            | 0.10          |
-| 3000 | 0.98            | 0.67          |
-| 9000 | 5.3             | 14.2          |
-| 20000| 36.6            | 112.4         |
+| 1000 | 0.14            | 0.20          |
+| 3337 | 0.90            | 1.25          |
+| 7401 | 4.3             | 5.0           |
+| 17463| 29.9            | 26.5          |
+| 29444| 108.0           | 70.7          |
