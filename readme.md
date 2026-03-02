@@ -34,7 +34,7 @@ linux系统输入make all显示demo.cpp求解结果图像
 windows输入
 ```bat
 g++ -O3 -fopenmp -w gen.cpp cal.cpp demo.cpp -o demo.exe
-.\ demo.exe
+./demo.exe
 python plotphi.py 
 ```
 显示迪利克雷求解结果
@@ -42,7 +42,7 @@ python plotphi.py
 输入
 ```bat
 g++ -O3 -fopenmp -w gen.cpp cal.cpp nemo.cpp -o nemo.exe
-.\ nemo.exe
+./nemo.exe
 python plotphi.py 
 ```
 显示诺伊曼求解结果
